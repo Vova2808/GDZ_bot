@@ -14,10 +14,8 @@ import datetime
 import os
 import pytz
 
-bot = telebot.TeleBot('5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE')
-# 6619437777:AAGAmak2lcgXlaJc1KniqJrpT2sjlSwXpIg
-# 5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE
-## 6187892568:AAEgjzdgHvnvKfxSY9uWREP_s2eJGwO-Fi8
+bot = telebot.TeleBot('YOUR TOKEN')
+
 
 print("Bot Запущен")
 
