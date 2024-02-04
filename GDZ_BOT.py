@@ -14,7 +14,10 @@ import datetime
 import os
 import pytz
 
-bot = telebot.TeleBot('YOUR_TOKEN')
+bot = telebot.TeleBot('5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE')
+# 6619437777:AAGAmak2lcgXlaJc1KniqJrpT2sjlSwXpIg
+# 5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE
+## 6187892568:AAEgjzdgHvnvKfxSY9uWREP_s2eJGwO-Fi8
 
 print("Bot Запущен")
 
@@ -29,6 +32,7 @@ def start(message):
   text = '''<code>/russ</code> и плюс пробел и номер упражнения\n
 Пример /russ 123 еслм химия то нужно\n написать номер парагрофа\n
 Все эти команды можно скопировать просто нажатиям на них\n
+Пиши один пробел между командой и номером упражнения\n
 _____________________________________________
 1. <code>/russ</code>
 2. <code>/algebra</code>
@@ -57,20 +61,21 @@ _____________________________________________
 def start(message):
   random_emoge = random.choice(emoge)
   # bot.send_message(message.chat.id, '1. russian ', parse_mode='Markdown')
-  text = text = '''<code>/russ</code> и плюс пробел и номер упражнения\n
-  Пример /russ 123 еслм химия то нужно\n написать номер парагрофа\n
-  Все эти команды можно скопировать просто нажатиям на них\n
-  _____________________________________________
-  1. <code>/russ</code>
-  2. <code>/algebra</code>
-  3. <code>/geometria</code>
-  4. <code>/himia</code>
-  5. <code>/physic</code>
-  6. <code>/eanglish</code>
-  7. /teoria виликая теория по русскому
-  _____________________________________________
-  Расписание шкилы
-  /raspisanie
+  text = '''<code>/russ</code> и плюс пробел и номер упражнения\n
+Пример /russ 123 еслм химия то нужно\n написать номер парагрофа\n
+Все эти команды можно скопировать просто нажатиям на них\n
+Пиши один пробел между командой и номером упражнения\n
+_____________________________________________
+1. <code>/russ</code>
+2. <code>/algebra</code>
+3. <code>/geometria</code>
+4. <code>/himia</code>
+5. <code>/physic</code>
+6. <code>/eanglish</code>
+7. /teoria виликая теория по русскому
+_____________________________________________
+Расписание шкилы
+/raspisanie
   '''
 
   bot.send_message(message.chat.id, text, parse_mode='html')
@@ -116,10 +121,10 @@ def kill_process(message):
       bot.send_message(message.chat.id, 'Такого упражнения нету')
 
   except:
-    bot.send_message(message.chat.id,
-                     "Что то не так у тебя один пробел после /russ 123")
+    # bot.send_message(message.chat.id,
+                     # "Что то не так у тебя один пробел после /russ 123")
 
-    print("Error ")
+      print("Error ")
 
 
 @bot.message_handler(commands=['eanglish'])
@@ -250,8 +255,8 @@ def kill_process(message):
     else:
       bot.send_message(message.chat.id, 'Такого номера нету')
   except:
-    bot.send_message(message.chat.id,
-                     "Что то не так у тебя один пробел после /geometria 123")
+    # bot.send_message(message.chat.id,
+                     # "Что то не так у тебя один пробел после /geometria 123")
     print("Error")
 
 
@@ -287,8 +292,8 @@ def kill_process(message):
     else:
       bot.send_message(message.chat.id, 'Такого парагрофа нету')
   except:
-    bot.send_message(message.chat.id,
-                     "Что то не так у тебя один пробел после /himia 123")
+    # bot.send_message(message.chat.id,
+                     # "Что то не так у тебя один пробел после /himia 123")
     print("Error")
 
 
@@ -325,9 +330,9 @@ def physic(message):
     else:
       bot.send_message(message.chat.id, 'Такого парагрофа нету')
   except:
-    bot.send_message(message.chat.id,
-                     "Что то не так у тебя один пробел после /himia 123")
-    print("Error")
+    # bot.send_message(message.chat.id,
+                     # "Что то не так у тебя один пробел после /himia 123")
+      print("Error")
 
 
 @bot.message_handler(commands=['raspisanie'])
@@ -537,6 +542,7 @@ def text(message):
       bot.send_message(message.chat.id, raspis)
       bot.send_message(message.chat.id, "😎")
     ##################################################################################
+
     current_time = datetime.datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
