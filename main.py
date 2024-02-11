@@ -39,8 +39,10 @@ except socket.error:
 #######################################################################################
 #######################################################################################
 
-bot = telebot.TeleBot('YOUR_TOKEN')
-
+bot = telebot.TeleBot('5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE')
+# 6619437777:AAGAmak2lcgXlaJc1KniqJrpT2sjlSwXpIg
+# 5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE
+## 6187892568:AAEgjzdgHvnvKfxSY9uWREP_s2eJGwO-Fi8
 
 print("Bot Запущен")
 
@@ -65,10 +67,10 @@ _____________________________________________
 6. <code>/eanglish</code>
 7. /teoria виликая теория по русскому
 _____________________________________________
-Расписание шкилы
-/raspisanie
-Погода не зная зачем
-/weather
+
+Расписание шкилы - /raspisanie
+Погода - /weather
+Сколько до лета - /summer
 '''
 
   bot.send_message(message.chat.id, text, parse_mode='html')
@@ -80,7 +82,8 @@ _____________________________________________
   developer = types.KeyboardButton("Разработчик")
   tester = types.KeyboardButton("Тестеровщики")
   weather_types = types.KeyboardButton("Погода")
-  markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, developer, tester)
+  summer = types.KeyboardButton("Сколько до лета")
+  markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
   bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
 
@@ -101,10 +104,10 @@ _____________________________________________
 6. <code>/eanglish</code>
 7. /teoria виликая теория по русскому
 _____________________________________________
-Расписание шкилы
-/raspisanie
-Погода не зная зачем
-/weather
+
+Расписание шкилы - /raspisanie
+Погода - /weather
+Сколько до лета - /summer
   '''
 
   bot.send_message(message.chat.id, text, parse_mode='html')
@@ -116,7 +119,8 @@ _____________________________________________
   developer = types.KeyboardButton("Разработчик")
   tester = types.KeyboardButton("Тестеровщики")
   weather_types = types.KeyboardButton("Погода")
-  markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, developer, tester)
+  summer = types.KeyboardButton("Сколько до лета")
+  markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
   bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
 
@@ -132,6 +136,30 @@ def weathers(message):
     bot.send_message(message.from_user.id, w_now)
     bot.send_message(message.from_user.id, w_feels)
 
+
+@bot.message_handler(commands=['summer'])
+def summer(message):
+    today = datetime.datetime.now()
+    summer_start = datetime.datetime(today.year, 6, 1)
+
+    if today.month > 6 or (today.month == 6 and today.day >= 21):
+        summer_start = summer_start.replace(year=today.year + 1)
+
+    time_diff = summer_start - today
+    days = time_diff.days
+
+    if days < 0:
+        bot.send_message(message.chat.id, "УРА ЛЕТО")
+
+    else:
+        time_diff = summer_start - today
+        days = time_diff.days
+        hours, remainder = divmod(time_diff.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        bot.send_message(message.chat.id, "До лета")
+        bot.send_message(message.chat.id, f"{days} дней {hours-3} часов {minutes} минут {seconds} секунд")
+        time.sleep(0.6)
 
 
 @bot.message_handler(commands=['russ'])
@@ -603,6 +631,9 @@ def text(message):
           file=open("log.txt", "a"))
 
 
+  if message.text == 'Лаки':
+      bot.send_photo(message.chat.id, "https://i.imgur.com/5OotKDV.jpeg")
+
   if message.text == 'Тестеровщики':
       testr_spisk = '''1. @collector0133
 2. @bobr15243
@@ -626,8 +657,10 @@ _____________________________________________
 6. <code>/eanglish</code>
 7. /teoria виликая теория по русскому
 _____________________________________________
-Расписание шкилы
-/raspisanie
+
+Расписание шкилы - /raspisanie
+Погода - /weather
+Сколько до лета - /summer
 '''
     bot.send_message(message.chat.id, text, parse_mode='html')
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
@@ -638,7 +671,8 @@ _____________________________________________
     developer = types.KeyboardButton("Разработчик")
     tester = types.KeyboardButton("Тестеровщики")
     weather_types = types.KeyboardButton("Погода")
-    markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, developer, tester)
+    summer = types.KeyboardButton("Сколько до лета")
+    markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
     bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
 
@@ -652,6 +686,30 @@ _____________________________________________
       w_feels = 'Ощущается как ' + str(temperature_feels) + ' °C'
       bot.send_message(message.from_user.id, w_now)
       bot.send_message(message.from_user.id, w_feels)
+
+
+  if message.text == 'Сколько до лета':
+    today = datetime.datetime.now()
+    summer_start = datetime.datetime(today.year, 6, 1)
+
+    if today.month > 6 or (today.month == 6 and today.day >= 21):
+        summer_start = summer_start.replace(year=today.year + 1)
+
+    time_diff = summer_start - today
+    days = time_diff.days
+
+    if days < 0:
+        bot.send_message(message.chat.id, "УРА ЛЕТО")
+
+    else:
+        time_diff = summer_start - today
+        days = time_diff.days
+        hours, remainder = divmod(time_diff.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        bot.send_message(message.chat.id, "До лета")
+        bot.send_message(message.chat.id, f"{days} дней {hours-3} часов {minutes} минут {seconds} секунд")
+        time.sleep(0.6)
 
 
   if message.text == 'Теория':
@@ -698,5 +756,7 @@ _____________________________________________
 
 
 keep_alive()
+
+bot.get_updates(timeout=30)
 
 bot.polling(none_stop=True)
