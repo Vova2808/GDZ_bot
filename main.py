@@ -754,6 +754,4 @@ _____________________________________________
 
 keep_alive()
 
-bot.get_updates(timeout=30)
-
 bot.polling(none_stop=True)
