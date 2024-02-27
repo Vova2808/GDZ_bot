@@ -39,7 +39,7 @@ except socket.error:
 #######################################################################################
 #######################################################################################
 
-bot = telebot.TeleBot('YOUT_TOKEN')
+bot = telebot.TeleBot('5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE')
 
 print("Bot Запущен")
 
@@ -252,7 +252,7 @@ def kill_process(message):
     bot.send_message(message.chat.id, 'Вот виликая теория 👇')
     bot.send_photo(message.chat.id, 'https://i.imgur.com/6TBByEL.jpeg')
     bot.send_photo(message.chat.id, 'https://i.imgur.com/2GnuFKY.jpeg')
-    bot.send_photo(message.chat.id, 'https://i.imgur.com/mQEsPjg.jpeg')
+    bot.send_photo(message.chat.id, 'https://add.pics/images/2024/02/25/IMG_20240225_210508.jpeg')
 
   except:
     # bot.send_message(message.chat.id, "Что то не хочет робить")
@@ -713,7 +713,7 @@ _____________________________________________
     bot.send_message(message.chat.id, "Виликая теория 👇")
     bot.send_photo(message.chat.id, 'https://i.imgur.com/H4Cvv6U.jpeg')
     bot.send_photo(message.chat.id, 'https://i.imgur.com/zvXrxoj.jpeg')
-    bot.send_photo(message.chat.id, 'https://i.imgur.com/xq09ivA.jpeg')
+    bot.send_photo(message.chat.id, 'https://add.pics/images/2024/02/25/IMG_20240225_210508.jpeg')
 
   if message.text == 'Расписание звонков':
     raspisanie_ = '''1) 8:30 - 9:15
@@ -753,5 +753,7 @@ _____________________________________________
 
 
 keep_alive()
+
+#bot.get_updates(timeout=30)
 
 bot.polling(none_stop=True)
