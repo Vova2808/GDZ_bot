@@ -8,6 +8,9 @@ import schedule
 import telebot
 import random
 
+from freeGPT import Client
+from googletrans import Translator
+
 from backround import keep_alive
 
 import requests
@@ -19,27 +22,27 @@ import pytz
 #######################################################################################
 ###############_ПРОВЕРЯЕТ_ЗАПУЩЕН_ЛИ_БОТ_ЧТО_БЫ_НЕ_БЫЛО_КОНФЛИКТОВ_С_API###############
 #######################################################################################
-import logging
-import socket
-import sys
-
-
-lock_id = "MYPROCESS"
-
-__lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-
-try:
-    __lock_socket.bind('\0' + lock_id)
-    logging.debug("Acquired lock %r" % (lock_id,))
-
-except socket.error:
-    logging.info("FAILED to acquire lock %r" % (lock_id,))
-    sys.exit()
+# import logging
+# import socket
+# import sys
+#
+#
+# lock_id = "MYPROCESS"
+#
+# __lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+#
+# try:
+#     __lock_socket.bind('\0' + lock_id)
+#     logging.debug("Acquired lock %r" % (lock_id,))
+#
+# except socket.error:
+#     logging.info("FAILED to acquire lock %r" % (lock_id,))
+#     sys.exit()
 #######################################################################################
 #######################################################################################
 #######################################################################################
 
-bot = telebot.TeleBot('YOUR_TOKEN')
+bot = telebot.TeleBot('5901990283:AAGvaI4GAlOzdLej5JSg_DLRmKi521AY2jE')
 
 print("Bot Запущен")
 
@@ -80,6 +83,8 @@ _____________________________________________
   tester = types.KeyboardButton("Тестеровщики")
   weather_types = types.KeyboardButton("Погода")
   summer = types.KeyboardButton("Сколько до лета")
+  chat_gpt = types.KeyboardButton("ChatGPT")
+  # markup.add(raspisan, raspisan_call, teoria, predmet, chat_gpt, weather_types, summer, developer, tester)
   markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
   bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
@@ -117,7 +122,8 @@ _____________________________________________
   tester = types.KeyboardButton("Тестеровщики")
   weather_types = types.KeyboardButton("Погода")
   summer = types.KeyboardButton("Сколько до лета")
-  markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
+  chat_gpt = types.KeyboardButton("ChatGPT")
+  markup.add(raspisan, raspisan_call, teoria, predmet, chat_gpt, weather_types, summer, developer, tester)
   bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
 
@@ -669,6 +675,7 @@ _____________________________________________
     tester = types.KeyboardButton("Тестеровщики")
     weather_types = types.KeyboardButton("Погода")
     summer = types.KeyboardButton("Сколько до лета")
+    # markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
     markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
     bot.send_message(message.chat.id, random_emoge, reply_markup=markup)
 
@@ -748,12 +755,50 @@ _____________________________________________
   if message.text in iphone_or_android:
     bot.send_message(message.chat.id, random_phrase)
 
+  if message.text == 'ChatGPT':
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    raspisan_call = types.KeyboardButton("выход")
+    markup.add(raspisan_call)
+    bot.send_message(message.chat.id, "Пожалуйсто отправте сообщение:", reply_markup=markup)
+
+    bot.register_next_step_handler(message, handle_user_message)
+
+
   # else:
   #     bot.send_message(message.chat.id, 'Чего напиши /help')
 
 
-keep_alive()
+def handle_user_message(message):
+    try:
+        bot.send_chat_action(message.chat.id, 'typing')
+        resp = Client.create_completion("gpt3", message.text)
+        translator = Translator()
+        translation = translator.translate(resp, src='en', dest='ru')
 
-#bot.get_updates(timeout=30)
+        bot.send_message(message.chat.id, translation.text)
+    except Exception as e:
+        print("Ошибка")
+
+    if message.text == "выход":
+        bot.send_message(message.chat.id, text, parse_mode='html')
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+        raspisan = types.KeyboardButton("Расписание")
+        raspisan_call = types.KeyboardButton("Расписание звонков")
+        teoria = types.KeyboardButton("Теория")
+        predmet = types.KeyboardButton("Предметы")
+        developer = types.KeyboardButton("Разработчик")
+        tester = types.KeyboardButton("Тестеровщики")
+        weather_types = types.KeyboardButton("Погода")
+        summer = types.KeyboardButton("Сколько до лета")
+        chat_gpt = types.KeyboardButton("ChatGPT")
+        # markup.add(raspisan, raspisan_call, teoria, predmet, chat_gpt, weather_types, summer, developer, tester)
+        markup.add(raspisan, raspisan_call, teoria, predmet, weather_types, summer, developer, tester)
+        bot.send_message(message.chat.id, "Выход", reply_markup=markup)
+
+    else:
+        bot.register_next_step_handler(message, handle_user_message)
+
+
+keep_alive()
 
 bot.polling(none_stop=True)
