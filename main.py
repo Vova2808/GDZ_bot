@@ -3,7 +3,7 @@ from telebot import types
 # import subprocess
 # import time
 # import openai
-import time 
+import time
 import schedule
 import telebot
 import random
@@ -413,17 +413,17 @@ def physic(message):
 
 @bot.message_handler(commands=['raspisanie'])
 def raspisanie(message):
-  bot.send_message(message.chat.id, "Расписание 👇")
-  bot.send_photo(message.chat.id, "https://i.imgur.com/G5gCOpp.jpeg")
-  # current_time = datetime.datetime.now()
-  # formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    bot.send_message(message.chat.id, "Расписание 👇")
+    bot.send_photo(message.chat.id, "https://i.postimg.cc/VLzCLgPr/IMG-20240410-215628.jpg")
+    # current_time = datetime.datetime.now()
+    # formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
-  # day_of_week = datetime.datetime.today().weekday()
-  moscow_timezone = pytz.timezone('Europe/Moscow')
-  moscow_time = datetime.datetime.now(moscow_timezone)
-  day_of_week = moscow_time.weekday()
+    # day_of_week = datetime.datetime.today().weekday()
+    moscow_timezone = pytz.timezone('Europe/Moscow')
+    moscow_time = datetime.datetime.now(moscow_timezone)
+    day_of_week = moscow_time.weekday()
 
-  days_of_week = {
+    days_of_week = {
       0: "Понедельник",
       1: "Вторник",
       2: "Среда",
@@ -431,85 +431,85 @@ def raspisanie(message):
       4: "Пятница",
       5: "Суббота",
       6: "Воскресенье"
-  }
-  print(days_of_week[day_of_week])
-  # bot.send_messge(message.chat.id, "Сегодня", days_of_week[day_of_week])
+    }
+    print(days_of_week[day_of_week])
+    # bot.send_messge(message.chat.id, "Сегодня", days_of_week[day_of_week])
 
-  if days_of_week[day_of_week] == "Понедельник":
-    bot.send_message(message.chat.id, "Грёбанный ПОНЕДЕЛЬНИК")
-    raspis = ('''1. <b>Разговор о не важном</b> - 8:00 - 9:15
-2. <b>Физ-ра</b> - 9:25 - 10:10
-3. <b>География</b> - 10:30 - 11:15
-4. <b>Русский</b> - 11:30 - 12:15
-5. <b><b><b>Лит-ра</b> - 12:35 - 13:20
-6. <b><b>Химия</b> - 13:30 - 14:15
-7. <b>Геометрия</b> - 14:20 - 15:05''')
-    bot.send_message(message.chat.id, raspis, parse_mode='html')
-    bot.send_message(message.chat.id, "😩")
+    if days_of_week[day_of_week] == "Понедельник":
+        bot.send_message(message.chat.id, "Грёбанный ПОНЕДЕЛЬНИК")
+        raspis = ('''1. <b>Разговор о НЕ важном</b> - 8:00 - 9:15
+2. <b>Физ-ра</b> - 9:35 - 10:20
+3. <b>География</b> - 10:40 - 11:25
+4. <b>Русский</b> - 11:40 - 12:25
+5. <b>Лит-ра</b> - 12:45 - 13:30
+6. <b>Химия</b> - 13:40 - 14:25
+7. <b>Геометрия</b> - 14:30 - 15:15''')
+        bot.send_message(message.chat.id, raspis, parse_mode='html')
+        bot.send_message(message.chat.id, "😩")
 
-  if days_of_week[day_of_week] == "Вторник":
-    bot.send_message(message.chat.id, "Вторник какие 8 уроков")
-    raspis = ('''1. <b>Физ-ра</b> - 8:00 - 9:15
-2. <b>Инф 1гр. Ин.яз 2гр</b> - 9:25 - 10:10
-3. <b>Алгебра</b> - 10:30 - 11:15
-4. <b>История</b> - 11:30 - 12:15
-5. <b>Русский</b> - 12:35 - 13:20
-6. <b>Обществознание</b> - 13:30 - 14:15
-7. <b>Биология</b> - 14:20 - 15:05
-8. <b>Английский 1гр</b> - 15:10 - 15:55''')
-    bot.send_message(message.chat.id, raspis, parse_mode='html')
-    bot.send_message(message.chat.id, "🤯")
+    if days_of_week[day_of_week] == "Вторник":
+      bot.send_message(message.chat.id, "Вторник какие 8 уроков")
+      raspis = ('''1. <b>Физ-ра</b> - 8:30 - 9:15
+2. <b>Русский</b> - 9:35 - 10:20
+3. <b>Алгебра</b> - 10:40 - 11:25
+4. <b>История</b> - 11:40 - 12:25
+5. <b>Лит-ра</b> - 12:45 - 13:30
+6. <b>Обществознание</b> - 13:40 - 14:25
+7. <b>Биология</b> - 14:30 - 15:15
+8. <b>Английский 1гр</b> - 15:20 - 16:05''')
+      bot.send_message(message.chat.id, raspis, parse_mode='html')
+      bot.send_message(message.chat.id, "🤯")
 
-  if days_of_week[day_of_week] == "Среда":
-    bot.send_message(message.chat.id, "Среда сколько можно")
-    raspis = ('''1. <b>Физика</b> - 8:30 - 9:15
-2. <b>Алгебра</b> - 9:25 - 10:10
-3. <b>Инф 2гр. Английский 1гр.</b> - 10:30 - 11:15
-4. <b>ОБЖ</b> - 11:30 - 12:15
-5. <b>Геометрия</b> - 12:35 - 13:20
-6. <b>Лит-ра - 13:30</b> - 14:15
-7. <b>Английский 2гр</b> - 14:20 - 15:05''')
-    bot.send_message(message.chat.id, raspis, parse_mode='html')
-    bot.send_message(message.chat.id, "🤬")
+    if days_of_week[day_of_week] == "Среда":
+      bot.send_message(message.chat.id, "Среда сколько можно")
+      raspis = ('''1. <b>Физика</b> - 8:30 - 9:15
+2. <b>Алгебра</b> - 9:35 - 10:20
+3. <b>Инф 2гр. Английский 1гр.</b> - 10:40 - 11:25
+4. <b>ОБЖ</b> - 11:40 - 12:25
+5. <b>Геометрия</b> - 12:45 - 13:30
+6. <b>Русский</b> - 13:40 - 14:25
+7. <b>Английский 2гр</b> - 14:30 - 16:05''')
+      bot.send_message(message.chat.id, raspis, parse_mode='html')
+      bot.send_message(message.chat.id, "🤬")
 
-  if days_of_week[day_of_week] == "Четверг":
-    bot.send_message(message.chat.id, "Четверг :(")
-    raspis = ('''1. <b>Английский</b> - 8:30 - 9:15
-2. <b>Русский</b> - 9:25 - 10:10
-3. <b>Геометрия</b> - 10:30 - 11:15
-4. <b>История</b> - 11:30 - 12:15
-5. <b>География</b> <b>- 12:35 - 13:20
-6. <b>Химия</b> - 13:30 - 14:15
-7. <b>Биология</b> - 14:20 - 15:05''')
-    bot.send_message(message.chat.id, raspis, parse_mode='html')
-    bot.send_message(message.chat.id, "🫠")
+    if days_of_week[day_of_week] == "Четверг":
+      bot.send_message(message.chat.id, "Четверг :(")
+      raspis = ('''1. <b>Английский 1гр.</b> - 8:30 - 9:15
+2. <b>Русский, Английский 2гр.</b> - 9:35 - 10:20
+3. <b>Геометрия</b> - 10:40 - 11:25
+4. <b>История</b> - 11:40 - 12:25
+5. <b>География</b> - 12:45 - 13:30
+6. <b>Химия</b> - 13:40 - 14:25
+7. <b>Биология</b> - 14:30 - 16:05''')
+      bot.send_message(message.chat.id, raspis, parse_mode='html')
+      bot.send_message(message.chat.id, "🫠")
 
-  if days_of_week[day_of_week] == "Пятница":
-    bot.send_message(message.chat.id, "Ура Пятница последний день")
-    raspis = ('''1. <b>Алгебра</b> - 8:30 - 9:15
-2. <b>Физ-ра</b> - 9:25 - 10:10
-3. <b>Физика</b> - 10:30 - 11:15
-4. <b>ИЗО</b> - 11:30 - 12:15
-5. <b>Технология</b> - 12:35 - 13:20
-6. <b>Технология</b> - 13:30 - 14:15
-7. <b>Английски</b> - 14:20 - 15:05''')
-    bot.send_message(message.chat.id, raspis, parse_mode='html')
-    bot.send_message(message.chat.id, "🥳")
+    if days_of_week[day_of_week] == "Пятница":
+      bot.send_message(message.chat.id, "Ура Пятница последний день")
+      raspis = raspis = ('''1. <b>Алгебра</b> - 8:30 - 9:15
+2. <b>Физ-ра - 9:35</b> - 10:20
+3. <b>Физика - 10:40</b> - 11:35
+4. <b>ИЗО - 11:40</b> - 12:25
+5. <b>Технология</b> - 12:45 - 13:30
+6. <b>Технология</b> - 13:40 - 14:25
+7. <b>Английски 2гр.</b> - 14:30 - 16:05''')
+      bot.send_message(message.chat.id, raspis,  parse_mode='html')
+      bot.send_message(message.chat.id, "🥳")
 
-  if days_of_week[day_of_week] == "Суббота":
-    raspis = ("Сегодня Суббота в школу не надо")
-    bot.send_message(message.chat.id, raspis)
-    bot.send_message(message.chat.id, "😎")
+    if days_of_week[day_of_week] == "Суббота":
+        raspis = ("Сегодня Суббота в школу не надо")
+        bot.send_message(message.chat.id, raspis)
+        bot.send_message(message.chat.id, "😎")
 
-  if days_of_week[day_of_week] == "Воскресенье":
-    raspis = ("Сегодня Воскресенье так что в шкилу не надо чиииииил")
-    bot.send_message(message.chat.id, raspis)
-    bot.send_message(message.chat.id, "😎")
+    if days_of_week[day_of_week] == "Воскресенье":
+        raspis = ("Сегодня Воскресенье так что в шкилу не надо чиииииил")
+        bot.send_message(message.chat.id, raspis)
+        bot.send_message(message.chat.id, "😎")
 
-  current_time = datetime.datetime.now()
-  formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        current_time = datetime.datetime.now()
+        formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
-  print("Расписание время -- (",
+    print("Расписание время -- (",
         formatted_time,
         ")",
         f" вот ID - {message.from_user.username} ",
@@ -528,7 +528,7 @@ def text(message):
 
   if message.text == 'Расписание':
     bot.send_message(message.chat.id, "Расписание 👇")
-    bot.send_photo(message.chat.id, "https://i.imgur.com/G5gCOpp.jpeg")
+    bot.send_photo(message.chat.id, "https://i.postimg.cc/VLzCLgPr/IMG-20240410-215628.jpg")
     # current_time = datetime.datetime.now()
     # formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -555,61 +555,61 @@ def text(message):
     if days_of_week[day_of_week] == "Понедельник":
       bot.send_message(message.chat.id, "Грёбанный ПОНЕДЕЛЬНИК")
       raspis = ('''1. <b>Разговор о НЕ важном</b> - 8:00 - 9:15
-2. <b>Физ-ра</b> - 9:25 - 10:10
-3. <b>География</b> - 10:30 - 11:15
-4. <b>Русский</b> - 11:30 - 12:15
-5. <b>Лит-ра</b> - 12:35 - 13:20
-6. <b>Химия</b> - 13:30 - 14:15
-7. <b>Геометрия</b> - 14:20 - 15:05''')
+2. <b>Физ-ра</b> - 9:35 - 10:20
+3. <b>География</b> - 10:40 - 11:25
+4. <b>Русский</b> - 11:40 - 12:25
+5. <b>Лит-ра</b> - 12:45 - 13:30
+6. <b>Химия</b> - 13:40 - 14:25
+7. <b>Геометрия</b> - 14:30 - 15:15''')
       bot.send_message(message.chat.id, raspis, parse_mode='html')
       bot.send_message(message.chat.id, "😩")
 
     if days_of_week[day_of_week] == "Вторник":
       bot.send_message(message.chat.id, "Вторник какие 8 уроков")
       raspis = ('''1. <b>Физ-ра</b> - 8:30 - 9:15
-2. <b>Инф 1гр. Ин.яз 2гр</b> - 9:25 - 10:10
-3. <b>Алгебра</b> - 10:30 - 11:15
-4. <b>История</b> - 11:30 - 12:15
-5. <b>Русский</b> - 12:35 - 13:20
-6. <b>Обществознание</b> - 13:30 - 14:15
-7. <b>Биология</b> - 14:20 - 15:05
-8. <b>Английский 1гр</b> - 15:10 - 15:55''')
+2. <b>Русский</b> - 9:35 - 10:20
+3. <b>Алгебра</b> - 10:40 - 11:25
+4. <b>История</b> - 11:40 - 12:25
+5. <b>Лит-ра</b> - 12:45 - 13:30
+6. <b>Обществознание</b> - 13:40 - 14:25
+7. <b>Биология</b> - 14:30 - 15:15
+8. <b>Английский 1гр</b> - 15:20 - 16:05''')
       bot.send_message(message.chat.id, raspis, parse_mode='html')
       bot.send_message(message.chat.id, "🤯")
 
     if days_of_week[day_of_week] == "Среда":
       bot.send_message(message.chat.id, "Среда сколько можно")
       raspis = ('''1. <b>Физика</b> - 8:30 - 9:15
-2. <b>Алгебра</b> - 9:25 - 10:10
-3. <b>Инф 2гр. Английский 1гр.</b> - 10:30 - 11:15
-4. <b>ОБЖ</b> - 11:30 - 12:15
-5. <b>Геометрия</b> - 12:35 - 13:20
-6. <b>Лит-ра</b> - 13:30 - 14:15
-7. <b>Английский 2гр</b> - 14:20 - 15:05''')
+2. <b>Алгебра</b> - 9:35 - 10:20
+3. <b>Инф 2гр. Английский 1гр.</b> - 10:40 - 11:25
+4. <b>ОБЖ</b> - 11:40 - 12:25
+5. <b>Геометрия</b> - 12:45 - 13:30
+6. <b>Русский</b> - 13:40 - 14:25
+7. <b>Английский 2гр</b> - 14:30 - 16:05''')
       bot.send_message(message.chat.id, raspis, parse_mode='html')
       bot.send_message(message.chat.id, "🤬")
 
     if days_of_week[day_of_week] == "Четверг":
       bot.send_message(message.chat.id, "Четверг :(")
-      raspis = ('''1. <b>Английский</b> - 8:30 - 9:15
-2. <b>Русский</b> - 9:25 - 10:10
-3. <b>Геометрия</b> - 10:30 - 11:15
-4. <b>История</b> - 11:30 - 12:15
-5. <b>География</b> - 12:35 - 13:20
-6. <b>Химия</b> - 13:30 - 14:15
-7. <b>Биология</b> - 14:20 - 15:05''')
+      raspis = ('''1. <b>Английский 1гр.</b> - 8:30 - 9:15
+2. <b>Русский, Английский 2гр.</b> - 9:35 - 10:20
+3. <b>Геометрия</b> - 10:40 - 11:25
+4. <b>История</b> - 11:40 - 12:25
+5. <b>География</b> - 12:45 - 13:30
+6. <b>Химия</b> - 13:40 - 14:25
+7. <b>Биология</b> - 14:30 - 16:05''')
       bot.send_message(message.chat.id, raspis, parse_mode='html')
       bot.send_message(message.chat.id, "🫠")
 
     if days_of_week[day_of_week] == "Пятница":
       bot.send_message(message.chat.id, "Ура Пятница последний день")
       raspis = raspis = ('''1. <b>Алгебра</b> - 8:30 - 9:15
-2. <b>Физ-ра - 9:25</b> - 10:10
-3. <b>Физика - 10:30</b> - 11:15
-4. <b>ИЗО - 11:30</b> - 12:15
-5. <b>Технология</b> - 12:35 - 13:20
-6. <b>Технология</b> - 13:30 - 14:15
-7. <b>Английски</b> - 14:20 - 15:05''')
+2. <b>Физ-ра - 9:35</b> - 10:20
+3. <b>Физика - 10:40</b> - 11:35
+4. <b>ИЗО - 11:40</b> - 12:25
+5. <b>Технология</b> - 12:45 - 13:30
+6. <b>Технология</b> - 13:40 - 14:25
+7. <b>Английски 2гр.</b> - 14:30 - 16:05''')
       bot.send_message(message.chat.id, raspis,  parse_mode='html')
       bot.send_message(message.chat.id, "🥳")
 
@@ -724,13 +724,13 @@ _____________________________________________
 
   if message.text == 'Расписание звонков':
     raspisanie_ = '''1) 8:30 - 9:15
-2) 9:25 - 10:10
-3) 10:30 - 11:15
-4) 11:30 - 12:15
-5) 12:35 - 13:20
-6) 13:30 - 14:15
-7) 14:20 - 15:05
-8) 15:10 - 15:55'''
+2) 9:35 - 10:20
+3) 10:40 - 11:25
+4) 11:40 - 12:25
+5) 12:45 - 13:30
+6) 13:40 - 14:25
+7) 14:30 - 15:15
+8) 15:20 - 16:05'''
     bot.send_message(message.chat.id, raspisanie_)
     # bot.send_photo(message.chat.id,'')
 
@@ -769,15 +769,14 @@ _____________________________________________
 
 
 def handle_user_message(message):
-    try:
-        bot.send_chat_action(message.chat.id, 'typing')
-        resp = Client.create_completion("gpt3", message.text)
-        translator = Translator()
-        translation = translator.translate(resp, src='en', dest='ru')
 
-        bot.send_message(message.chat.id, translation.text)
-    except Exception as e:
-        print("Ошибка")
+    bot.send_chat_action(message.chat.id, 'typing')
+    resp = Client.create_completion("gpt3", message.text)
+    translator = Translator()
+    translation = translator.translate(resp, src='en', dest='ru')
+
+    bot.send_message(message.chat.id, translation.text)
+
 
     if message.text == "выход":
         bot.send_message(message.chat.id, text, parse_mode='html')
@@ -800,5 +799,7 @@ def handle_user_message(message):
 
 
 keep_alive()
+
+bot.infinity_polling()
 
 bot.polling(none_stop=True)
