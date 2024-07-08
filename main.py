@@ -963,28 +963,18 @@ def text(message):
 
 
     if message.text == 'Сколько до лета':
-        today = datetime.now()
-        summer_start = datetime(today.year, 6, 1)
+        url = "https://www.calc.ru/dney-do-leta.html"
+        response = requests.get(url)
+        response.encoding = response.apparent_encoding  # Правильная обработка кодировки
+        soup = BeautifulSoup(response.text, 'html.parser')
+        countdown_div = soup.find('div', id='count')
 
-        if today.month > 6 or (today.month == 6 and today.day >= 21):
-            summer_start = summer_start.replace(year=today.year + 1)
-
-            time_diff = summer_start - today
-            days = time_diff.days
-
-        if days < 0:
-            bot.send_message(message.chat.id, "УРА ЛЕТО")
+        if countdown_div:
+            countdown_text = countdown_div.get_text(strip=True)
+            bot.send_message(message.chat.id,f"До лета 2025 года осталось\n <b>{countdown_text}</b>", parse_mode='html')
 
         else:
-            time_diff = summer_start - today
-            days = time_diff.days
-            hours, remainder = divmod(time_diff.seconds, 3600)
-            minutes, seconds = divmod(remainder, 60)
-
-            bot.send_message(message.chat.id, "До лета")
-            bot.send_message(message.chat.id, f"{days} дней {hours-3} часов {minutes} минут {seconds} секунд")
-            time.sleep(0.6)
-
+            bot.send_message(message.chat.id,"Не удалось найти элемент с нужными данными.")
 
     if message.text == 'Теория':
         bot.send_message(message.chat.id, "Виликая теория 👇")
