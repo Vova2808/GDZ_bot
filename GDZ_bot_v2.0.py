@@ -22,7 +22,8 @@ import pytz
 
 
 
-bot = telebot.TeleBot('6088717747:AAGQtmOEIsNxbBwbsFGP3thxsmE3SxlCwoI')
+
+bot = telebot.TeleBot('7669086286:AAGTBW0iEW_w76o9jtUnk-U9OpNEiETAB0M')
 
 # Путь к файлу с балансами
 BALANCE_FILE = 'user_balances.json'
@@ -88,7 +89,7 @@ def start(message):
     predmet = types.InlineKeyboardButton("📚 Предметы", callback_data='predmet')
     raspisan = types.InlineKeyboardButton('🗓 Расписание (На сегодня)', callback_data='raspisan')
     raspisan_all = types.InlineKeyboardButton('🗓 Расписание (На всю неделю)', callback_data='raspisan_all')
-    dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
+    # dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
     raspisan_call = types.InlineKeyboardButton('⏰ Расписание звонков', callback_data='raspisan_call')
     # teoria = types.InlineKeyboardButton('📝 Теория', callback_data='teoria')
     top = types.InlineKeyboardButton('🔝 Топ по баклажанам', callback_data='top')
@@ -96,7 +97,7 @@ def start(message):
     # mems = types.InlineKeyboardButton('😂 Мемы (Пиздец смешно)', callback_data='mems')
 
     # Добавление кнопок на клавиатуру
-    markup_start.add(predmet, raspisan, raspisan_all, dz, raspisan_call, top, baklagan)
+    markup_start.add(predmet, raspisan, raspisan_all, raspisan_call, top, baklagan)
 
     # Открываем файл фотографии перед отправкой
 
@@ -195,7 +196,7 @@ def callback_inline(call):
         predmet = types.InlineKeyboardButton("📚 Предметы", callback_data='predmet')
         raspisan = types.InlineKeyboardButton('🗓 Расписание (На сегодня)', callback_data='raspisan')
         raspisan_all = types.InlineKeyboardButton('🗓 Расписание (На всю неделю)', callback_data='raspisan_all')
-        dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
+        # dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
         raspisan_call = types.InlineKeyboardButton('⏰ Расписание звонков', callback_data='raspisan_call')
         # teoria = types.InlineKeyboardButton('📝 Теория', callback_data='teoria')
         top = types.InlineKeyboardButton('🔝 Топ по баклажанам', callback_data='top')
@@ -203,7 +204,7 @@ def callback_inline(call):
         # mems = types.InlineKeyboardButton('😂 Мемы (Пиздец смешно)', callback_data='mems')
 
         # Добавление кнопок на клавиатуру
-        markup_menu.add(predmet, raspisan, raspisan_all, dz, raspisan_call, top, baklagan)
+        markup_menu.add(predmet, raspisan, raspisan_all, raspisan_call, top, baklagan)
 
         bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                  caption=text_start, parse_mode='HTML', reply_markup=markup_menu)
@@ -211,15 +212,20 @@ def callback_inline(call):
 
     if call.data == 'predmet':
         bot.answer_callback_query(call.id, "📚 Предметы")
-        markup_predmet = types.InlineKeyboardMarkup(row_width=2)
+        markup_predmet = types.InlineKeyboardMarkup()
         algebra = types.InlineKeyboardButton("➕➖Алгебра✖️➗", callback_data='algebra')
         geometria = types.InlineKeyboardButton("📐Геометрия", callback_data='geometria')
         russ = types.InlineKeyboardButton("🇷🇺 Русский", callback_data='russ')
         english = types.InlineKeyboardButton("🇺🇸 Английский", callback_data='english')
         phisic = types.InlineKeyboardButton("⚛️Физика🍎", callback_data='phisic')
-        himia = types.InlineKeyboardButton("👩‍🔬Химия", callback_data='himia')
+        # himia = types.InlineKeyboardButton("👩‍🔬Химия", callback_data='himia')
         back = types.InlineKeyboardButton("🔙 Назад", callback_data='back_to_menu')
-        markup_predmet.add(algebra, geometria, russ, english, phisic, himia, back)
+
+        markup_predmet.add(algebra, geometria)
+        markup_predmet.add(russ, english)
+        markup_predmet.add(phisic)
+        markup_predmet.add(back)
+
 
         bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                  caption="Выберите предмет:", reply_markup=markup_predmet)
@@ -241,21 +247,17 @@ def callback_inline(call):
         # print(days_of_week[day_of_week])
 
         if days_of_week[day_of_week] == "Понедельник":
-            raspis = ('''😩 Грёбанный ПОНЕДЕЛЬНИК
+            raspis = ('''Понедельник:
             
-1. <b>Разговор о влажном</b> - 8:30 - 9:15
+1. <b>Разговор о важном</b> - 8:30 - 9:15
 2. <b>👩‍🔬Химия</b> - 9:35 - 10:20
 3. <b>📐Геометрия</b> - 10:40 - 11:25
 4. <b>📜 История</b> - 11:40 - 12:25
 5. <b>🇺🇸 Английский</b> - 12:45 - 13:30
 6. <b>Физик</b> - 13:40 - 14:25
-7. <b>📖 Лит-ра</b> - 14:30 - 15:15''')
-            bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                     caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
+7. <b>📖 Лит-ра</b> - 14:30 - 15:15
 
-
-        if days_of_week[day_of_week] == "Вторник":
-            raspis = ('''🤯 Вторник какие 8 уроков
+Вторник:
             
 1. <b>⚽️Физ-ра</b> - 8:30 - 9:15
 2. <b>📖 Лит-ра</b> - 9:35 - 10:20
@@ -267,12 +269,24 @@ def callback_inline(call):
             bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                      caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
 
-        if days_of_week[day_of_week] == "Среда":
-            raspis = ('''🤬 Среда сколько можно
+
+        if days_of_week[day_of_week] == "Вторник":
+            raspis = ('''Вторник:
+            
+1. <b>⚽️Физ-ра</b> - 8:30 - 9:15
+2. <b>📖 Лит-ра</b> - 9:35 - 10:20
+3. <b>🗺 География</b> - 10:40 - 11:25
+4. <b>🧍 Обществознание</b> - 11:40 - 12:25
+5. <b>➕➖Алгебра✖️➗</b> - 12:45 - 13:30
+6. <b>🇷🇺 Русский</b> - 13:40 - 14:25
+7. <b>⚛️Физика🍎</b> - 14:30 - 15:15
+
+Среда:
             
 1. <b>➕➖Алгебра✖️➗</b> - 8:30 - 9:15
 2. <b>📐Геометрия</b> - 9:35 - 10:20
 3. <b>🇺🇸 Английский</b> - 10:40 - 11:25
+4. <b>🇷🇺 Русский</b> - 11:40 - 12:25
 4. <b>🇷🇺 Русский</b> - 11:40 - 12:25
 5. <b>💻 Информатика</b> - 12:45 - 13:30
 6. <b>💻 Труд</b> - 13:40 - 14:25
@@ -280,8 +294,19 @@ def callback_inline(call):
             bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                      caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
 
-        if days_of_week[day_of_week] == "Четверг":
-            raspis = ('''🫠 Четверг :(
+        if days_of_week[day_of_week] == "Среда":
+            raspis = ('''Среда:
+            
+1. <b>➕➖Алгебра✖️➗</b> - 8:30 - 9:15
+2. <b>📐Геометрия</b> - 9:35 - 10:20
+3. <b>🇺🇸 Английский</b> - 10:40 - 11:25
+4. <b>🇷🇺 Русский</b> - 11:40 - 12:25
+4. <b>🇷🇺 Русский</b> - 11:40 - 12:25
+5. <b>💻 Информатика</b> - 12:45 - 13:30
+6. <b>💻 Труд</b> - 13:40 - 14:25
+7. <b>🧬 Биология</b> - 14:30 - 16:05
+
+Четверг:
             
 1. <b>Профориентация</b> - 8:30 - 9:15
 2. <b>⚽️Физ-ра</b> - 9:35 - 10:20
@@ -294,8 +319,31 @@ def callback_inline(call):
             bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                      caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
 
+        if days_of_week[day_of_week] == "Четверг":
+            raspis = ('''Четверг:
+            
+1. <b>Профориентация</b> - 8:30 - 9:15
+2. <b>⚽️Физ-ра</b> - 9:35 - 10:20
+3. <b>📜 История</b> - 10:40 - 11:25
+4. <b>🇷🇺 Русский</b> - 11:40 - 12:25
+5. <b>👩‍🔬Химия</b> - 12:45 - 13:30
+6. <b>➕➖Алгебра✖️➗</b> - 13:40 - 14:25
+7. <b>📖 Лит-ра</b> - 14:30 - 15:15
+8. <b>ОБЗР</b> - 15:20 - 16:05 
+
+Пятница:
+            
+1. <b>🧬 Биология</b> - 8:30 - 9:15
+2. <b>🇺🇸 Английский - 9:35</b> - 10:20
+3. <b>📜 История - 10:40</b> - 11:35
+4. <b>⚛️Физика🍎 - 11:40</b> - 12:25
+5. <b>🗺 География</b> - 12:45 - 13:30
+6. <b>Вероятность и стат.</b> - 13:40 - 14:25''')
+            bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                                     caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
+
         if days_of_week[day_of_week] == "Пятница":
-            raspis = ('''🥳 Ура Пятница последний день
+            raspis = ('''Пятница:
             
 1. <b>🧬 Биология</b> - 8:30 - 9:15
 2. <b>🇺🇸 Английский - 9:35</b> - 10:20
@@ -308,8 +356,9 @@ def callback_inline(call):
 
         if days_of_week[day_of_week] == "Суббота":
             raspis = '''😎 Сегодня Суббота в школу не надо
+            
 <b>Понедельник:</b>         
-1. <b>Разговор о влажном</b> - 8:30 - 9:15
+1. <b>Разговор о важном</b> - 8:30 - 9:15
 2. <b>👩‍🔬Химия</b> - 9:35 - 10:20
 3. <b>📐Геометрия</b> - 10:40 - 11:25
 4. <b>📜История</b> - 11:40 - 12:25
@@ -320,9 +369,10 @@ def callback_inline(call):
                                      caption=raspis, parse_mode='HTML', reply_markup=call.message.reply_markup)
 
         if days_of_week[day_of_week] == "Воскресенье":
-            raspis = '''😎Сегодня Воскресенье так что в шкилу не надо чиииииил
+            raspis = '''😎Сегодня Воскресенье так что в шкилу не надо
+            
 <b>Понедельник:</b>          
-1. <b>Разговор о влажном</b> - 8:30 - 9:15
+1. <b>Разговор о важном</b> - 8:30 - 9:15
 2. <b>👩‍🔬Химия</b> - 9:35 - 10:20
 3. <b>📐Геометрия</b> - 10:40 - 11:25
 4. <b>📜История</b> - 11:40 - 12:25
@@ -335,7 +385,7 @@ def callback_inline(call):
     if call.data == 'raspisan_all':
         raspis = '''---------------------------------------
 <b>Понедельник:</b>         
-1. <b>Разговор о влажном</b> - 8:30 - 9:15
+1. <b>Разговор о важном</b> - 8:30 - 9:15
 2. <b>👩‍🔬Химия</b> - 9:35 - 10:20
 3. <b>📐Геометрия</b> - 10:40 - 11:25
 4. <b>📜История</b> - 11:40 - 12:25
@@ -393,7 +443,7 @@ def callback_inline(call):
         predmet = types.InlineKeyboardButton("📚 Предметы", callback_data='predmet')
         raspisan = types.InlineKeyboardButton('🗓 Расписание (На сегодня)', callback_data='raspisan')
         raspisan_all = types.InlineKeyboardButton('🗓 Расписание (На всю неделю)', callback_data='raspisan_all')
-        dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
+        # dz = types.InlineKeyboardButton("🏫 Д/З", callback_data='dz')
         raspisan_call = types.InlineKeyboardButton('⏰ Расписание звонков', callback_data='raspisan_call')
         # teoria = types.InlineKeyboardButton('📝 Теория', callback_data='teoria')
         top = types.InlineKeyboardButton('🔝 Топ по баклажанам', callback_data='top')
@@ -401,7 +451,7 @@ def callback_inline(call):
         # mems = types.InlineKeyboardButton('😂 Мемы (Пиздец смешно)', callback_data='mems')
 
         # Добавление кнопок на клавиатуру
-        markup_start.add(predmet, raspisan, raspisan_all, dz, raspisan_call, top, baklagan)
+        markup_start.add(predmet, raspisan, raspisan_all, raspisan_call, top, baklagan)
 
         # Открываем файл фотографии перед отправкой
 
@@ -577,7 +627,7 @@ def callback_inline(call):
 
 <b>Выбери упражнения или вопросы: </b>\n'''
 
-        markup_predmet = types.InlineKeyboardMarkup(row_width=1)
+        markup_predmet = types.InlineKeyboardMarkup()
         upr = types.InlineKeyboardButton("⚛️ Упражнение", callback_data='upr')
         questshens = types.InlineKeyboardButton("🍎 Вопросы", callback_data='questshens')
         back = types.InlineKeyboardButton("🔙 Назад", callback_data='predmet')
@@ -647,7 +697,7 @@ def callback_inline(call):
 
         text = f'''🏫 Д/З
 
-<b>Скоро напишу парсер</b>\n'''
+<b>Я ещё не сделал</b>\n'''
         markup_predmet = types.InlineKeyboardMarkup(row_width=1)
         back = types.InlineKeyboardButton("🔙 Назад", callback_data='back_to_menu')
         markup_predmet.add(back)
